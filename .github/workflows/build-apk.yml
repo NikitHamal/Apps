@@ -36,18 +36,40 @@ jobs:
       env:
         ANDROID_HOME: /usr/local/lib/android/sdk
 
-    - name: Generate Gradle wrapper if missing
+    - name: Verify and fix Gradle wrapper
       run: |
-        if [ ! -f "./gradlew" ]; then
-          echo "Gradle wrapper not found, generating new wrapper"
-          gradle wrapper
+        # Check if Gradle wrapper files exist and are valid
+        if [ ! -f "./gradlew" ] || [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
+          echo "Gradle wrapper files missing or incomplete. Installing Gradle and regenerating wrapper..."
+          
+          # Install Gradle if needed
+          if ! command -v gradle &> /dev/null; then
+            echo "Installing Gradle..."
+            wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip -O gradle.zip
+            unzip -q gradle.zip
+            export PATH=$PWD/gradle-8.5/bin:$PATH
+          fi
+          
+          # Generate the wrapper files
+          gradle wrapper --gradle-version 8.5
+          
+          # Make gradlew executable
+          chmod +x ./gradlew
+        else
+          echo "Gradle wrapper files found, checking permissions..."
+          chmod +x ./gradlew
         fi
-
-    - name: Make gradlew executable
-      run: chmod +x ./gradlew
-
-    - name: Display Gradle and AGP versions
-      run: ./gradlew --version
+        
+        # Print wrapper version to verify it's working
+        echo "Gradle wrapper version:"
+        ./gradlew --version || {
+          echo "Gradle wrapper not functioning properly, forcing regeneration..."
+          rm -rf gradle/wrapper
+          gradle wrapper --gradle-version 8.5
+          chmod +x ./gradlew
+        }
+      env:
+        ANDROID_HOME: /usr/local/lib/android/sdk
 
     - name: Build the APK
       run: ./gradlew assembleDebug --stacktrace --info
