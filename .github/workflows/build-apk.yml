@@ -36,25 +36,46 @@ jobs:
       env:
         ANDROID_HOME: /usr/local/lib/android/sdk
 
+    - name: List project files (debugging)
+      run: |
+        echo "List all files in the project:"
+        find . -type f | grep -v "/\." | sort
+        
+        echo "Check Gradle wrapper files:"
+        ls -la ./gradlew ./gradle/wrapper/ 2>/dev/null || echo "Gradle wrapper files missing"
+        
+        if [ -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
+          echo "gradle-wrapper.jar exists with size:"
+          ls -lh ./gradle/wrapper/gradle-wrapper.jar
+        else
+          echo "gradle-wrapper.jar is missing!"
+        fi
+
     - name: Verify and fix Gradle wrapper
       run: |
+        # Install Gradle if needed (will only be used to generate the wrapper if missing)
+        if ! command -v gradle &> /dev/null; then
+          echo "Installing Gradle..."
+          wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip -O gradle.zip
+          unzip -q gradle.zip
+          export PATH=$PWD/gradle-8.5/bin:$PATH
+        fi
+        
         # Check if Gradle wrapper files exist and are valid
-        if [ ! -f "./gradlew" ] || [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ]; then
-          echo "Gradle wrapper files missing or incomplete. Installing Gradle and regenerating wrapper..."
+        if [ ! -f "./gradlew" ] || [ ! -f "./gradle/wrapper/gradle-wrapper.jar" ] || [ ! -s "./gradle/wrapper/gradle-wrapper.jar" ]; then
+          echo "Gradle wrapper files missing or empty. Regenerating wrapper..."
           
-          # Install Gradle if needed
-          if ! command -v gradle &> /dev/null; then
-            echo "Installing Gradle..."
-            wget -q https://services.gradle.org/distributions/gradle-8.5-bin.zip -O gradle.zip
-            unzip -q gradle.zip
-            export PATH=$PWD/gradle-8.5/bin:$PATH
-          fi
+          # Make gradle directory structure if it doesn't exist
+          mkdir -p gradle/wrapper
           
           # Generate the wrapper files
           gradle wrapper --gradle-version 8.5
           
           # Make gradlew executable
           chmod +x ./gradlew
+          
+          echo "Regenerated Gradle wrapper files:"
+          ls -la gradle/wrapper/
         else
           echo "Gradle wrapper files found, checking permissions..."
           chmod +x ./gradlew
@@ -67,6 +88,10 @@ jobs:
           rm -rf gradle/wrapper
           gradle wrapper --gradle-version 8.5
           chmod +x ./gradlew
+          
+          # Verify again
+          echo "Retry - Gradle wrapper version:"
+          ./gradlew --version
         }
       env:
         ANDROID_HOME: /usr/local/lib/android/sdk
