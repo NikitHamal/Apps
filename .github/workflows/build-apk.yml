@@ -36,10 +36,12 @@ jobs:
       env:
         ANDROID_HOME: /usr/local/lib/android/sdk
 
-    - name: Verify Gradle wrapper exists
+    - name: Generate Gradle wrapper if missing
       run: |
-        ls -l gradlew
-        if [ ! -f "./gradlew" ]; then echo "gradlew not found"; exit 1; fi
+        if [ ! -f "./gradlew" ]; then
+          echo "Gradle wrapper not found, generating new wrapper"
+          gradle wrapper
+        fi
 
     - name: Make gradlew executable
       run: chmod +x ./gradlew
