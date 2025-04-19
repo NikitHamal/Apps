@@ -1,10 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <!-- Base application theme -->
-    <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Customize your theme here -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-</resources>
+PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHJlc291cmNlcz4KICAgIDwhLS0gQmFzZSBhcHBsaWNhdGlvbiB0aGVtZSAtLT4KICAgIDxzdHlsZSBuYW1lPSJBcHBUaGVtZSIgcGFyZW50PSJUaGVtZS5NYXRlcmlhbENvbXBvbmVudHMuTGlnaHQuRGFya0FjdGlvbkJhciI+CiAgICAgICAgPCEtLSBDdXN0b21pemUgeW91ciB0aGVtZSBoZXJlIC0tPgogICAgICAgIDxpdGVtIG5hbWU9ImNvbG9yUHJpbWFyeSI+QGNvbG9yL2NvbG9yUHJpbWFyeTwvaXRlbT4gCiAgICAgICAgPGl0ZW0gbmFtZT0iY29sb3JQcmltYXJ5RGFyayI+QGNvbG9yL2NvbG9yUHJpbWFyeURhcms8L2l0ZW0+IAogICAgICAgIDxpdGVtIG5hbWU9ImNvbG9yQWNjZW50Ij5AY29sb3IvY29sb3JBY2NlbnQ8L2l0ZW0+CiAgICA8L3N0eWxlPgo8L3Jlc291cmNlcz4=

@@ -1,8 +1,1 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-plugins {
-    id 'com.android.application' version '8.1.2' apply false
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
+Ly8gVG9wLWxldmVsIGJ1aWxkIGZpbGUgd2hlcmUgeW91IGNhbiBhZGQgY29uZmlndXJhdGlvbiBvcHRpb25zIGNvbW1vbiB0byBhbGwgc3ViLXByb2plY3RzL21vZHVsZXMuCnBsdWdpbnMgewogICAgaWQoJ2NvbS5hbmRyb2lkLmFwcGxpY2F0aW9uJykgdmVyc2lvbiAnOC4xLjEnIGFwcGx5IGZhbHNlIC8vIEV4YW1wbGUgdmVyc2lvbgogICAgLy8gQWRkIG90aGVyIHBsdWdpbnMgaWYgbmVlZGVkLCBlLmcuLCBLb3RsaW4KfQo=
