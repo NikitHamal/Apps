@@ -1,1 +1,32 @@
-name: Build APK ... (rest of YAML)
+name: Build Android APK
+
+on:
+  push: # Optional: Trigger on push to main branch
+    branches: [ main ]
+  workflow_dispatch: # <-- Required trigger to allow manual/API dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 17 # Adjust JDK version if needed
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Build with Gradle (Debug)
+      run: ./gradlew assembleDebug # Use assembleRelease for release builds
+
+    - name: Upload Debug APK artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: app-debug
+        path: app/build/outputs/apk/debug/app-debug.apk # Verify this path
