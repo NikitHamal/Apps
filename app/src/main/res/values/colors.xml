@@ -1,1 +1,7 @@
-PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHJlc291cmNlcz4KICAgIDxjb2xvciBuYW1lPSJjb2xvckFjY2VudCI+IzIxOTZGMzwvY29sb3I+CiAgICA8Y29sb3IgbmFtZT0iY29sb3JQcmltYXJ5Ij4jM0Y1MUI1PC9jb2xvcj4KICAgIDxjb2xvciBuYW1lPSJjb2xvclByaW1hcnlEYXJrIj4jMzAzRjlGPC9jb2xvcj4KICAgIDxjb2xvciBuYW1lPSJjb2xvckNvbnRyb2xIaWdobGlnaHQiPiNFMEUwRTA8L2NvbG9yPgo8L3Jlc291cmNlcz4=
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#2196F3</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorControlHighlight">#E0E0E0</color>
+</resources>
