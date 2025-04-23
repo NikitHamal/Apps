@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.widget.imageview android:id="@+id/imageview_1745064657674" android:properties="[object Object]"
+    <android.widget.button android:id="@+id/button1" android:properties="[object Object]"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
